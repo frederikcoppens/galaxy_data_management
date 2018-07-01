@@ -13,3 +13,14 @@ data_managers:
       data_table_reload:
         - all_fasta
         - __dbkeys__
+
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bowtie2_index_builder/bowtie2_index_builder_data_manager/2.3.0
+      params:
+        - 'all_fasta_source': '{{ item.id }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        # Bowtie creates indices for Bowtie and TopHat
+        - bowtie2_indexes
+        - tophat2_indexes
