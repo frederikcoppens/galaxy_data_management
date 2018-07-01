@@ -1,0 +1,5 @@
+genomes:
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/mco.con.gz
+      name: Micromonas commoda JGI v3.0
+      id: Micromonas_commoda_JGI_v3.0
+
