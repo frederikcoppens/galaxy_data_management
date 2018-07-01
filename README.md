@@ -9,8 +9,22 @@ Building a .yaml file to automatically add all plant genomes available in the PL
   - writes genomes.yaml file
   - combines the data_managers and genomes yaml files to one
 - On command line
-  - cd into the build dir
-  - run the build.sh script: this adds the genomes to the all_fasta tool_data table and runs the other data managers specified
+
+```
+  cd build
+  sh build.sh
+```
+
+- alternatively:
+
+```
+  cd build
+  cp build_public.sh.sample build_public.sh
+
+  # update the content with the right url and API key
+
+  sh build_public.sh
+```
 
 ## Data managers included
 
