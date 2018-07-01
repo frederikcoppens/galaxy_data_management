@@ -1,7 +1,214 @@
 genomes:
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ach.con.gz
+      name: Actinidia chinensis FEI Lab v1.0
+      id: Actinidia_chinensis_FEI_Lab_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/atr.con.gz
+      name: Amborella trichopoda JGI v1.0
+      id: Amborella_trichopoda_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/aco.con.gz
+      name: Ananas comosus JGI v3.0
+      id: Ananas_comosus_JGI_v3.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/aly.con.gz
+      name: Arabidopsis lyrata JGI v2.1
+      id: Arabidopsis_lyrata_JGI_v2.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/ath.con.gz
+      name: Arabidopsis thaliana COL0 Araport11
+      id: Arabidopsis_thaliana_COL0_Araport11
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/aip.con.gz
+      name: Arachis ipaensis Peanut Base v1.0
+      id: Arachis_ipaensis_Peanut_Base_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/bvu.con.gz
+      name: Beta vulgaris RefBeet v1.2
+      id: Beta_vulgaris_RefBeet_v1.2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/bdi.con.gz
+      name: Brachypodium distachyon JGI v3.1
+      id: Brachypodium_distachyon_JGI_v3.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/bol.con.gz
+      name: Brassica oleracea Ensembl Genomes v2.1
+      id: Brassica_oleracea_Ensembl_Genomes_v2.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/bra.con.gz
+      name: Brassica rapa JGI FPsc1.3
+      id: Brassica_rapa_JGI_FPsc1.3
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ccaj.con.gz
+      name: Cajanus cajan Penguin Genomics v5.0
+      id: Cajanus_cajan_Penguin_Genomics_v5.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/cru.con.gz
+      name: Capsella rubella JGI v1.0
+      id: Capsella_rubella_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/can.con.gz
+      name: Capsicum annuum Pepper Genome v2.0
+      id: Capsicum_annuum_Pepper_Genome_v2.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/cpa.con.gz
+      name: Carica papaya JGI ASGPB0.4
+      id: Carica_papaya_JGI_ASGPB0.4
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/cqu.con.gz
+      name: Chenopodium quinoa JGI v1.0
+      id: Chenopodium_quinoa_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/cre.con.gz
+      name: Chlamydomonas reinhardtii JGI v5.5
+      id: Chlamydomonas_reinhardtii_JGI_v5.5
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/car.con.gz
+      name: Cicer arietinum LIS v1.0
+      id: Cicer_arietinum_LIS_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/cla.con.gz
+      name: Citrullus lanatus Cucurbit Genomics Database v1.0
+      id: Citrullus_lanatus_Cucurbit_Genomics_Database_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ccl.con.gz
+      name: Citrus clementina JGI v1.0
+      id: Citrus_clementina_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ccan.con.gz
+      name: Coffea canephora Coffee Genome Hub v1
+      id: Coffea_canephora_Coffee_Genome_Hub_v1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/col.con.gz
+      name: Corchorus olitorius GenBank v1.0
+      id: Corchorus_olitorius_GenBank_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/cme.con.gz
+      name: Cucumis melo Melonomics v3.5
+      id: Cucumis_melo_Melonomics_v3.5
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/csa.con.gz
+      name: Cucumis sativus L. JGI v1.0
+      id: Cucumis_sativus_L._JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/dca.con.gz
+      name: Daucus carota JGI v2.0
+      id: Daucus_carota_JGI_v2.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/egu.con.gz
+      name: Elaeis guineensis NCBI Genome v1.0
+      id: Elaeis_guineensis_NCBI_Genome_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/egut.con.gz
+      name: Erythranthe guttata JGI v2.0
+      id: Erythranthe_guttata_JGI_v2.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/egr.con.gz
+      name: Eucalyptus grandis JGI v2.0
+      id: Eucalyptus_grandis_JGI_v2.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/fve.con.gz
+      name: Fragaria vesca JGI v1.1
+      id: Fragaria_vesca_JGI_v1.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/gma.con.gz
+      name: Glycine max JGI Wm82.a2.v1
+      id: Glycine_max_JGI_Wm82.a2.v1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/gra.con.gz
+      name: Gossypium raimondii JGI v2.1
+      id: Gossypium_raimondii_JGI_v2.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/hbr.con.gz
+      name: Hevea brasiliensis NCBI Genomes v1
+      id: Hevea_brasiliensis_NCBI_Genomes_v1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/hvu.con.gz
+      name: Hordeum vulgare Ensembl Genomes ASM32608v1
+      id: Hordeum_vulgare_Ensembl_Genomes_ASM32608v1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/mdo.con.gz
+      name: Malus domestica Penguin Genomics v2
+      id: Malus_domestica_Penguin_Genomics_v2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/mes.con.gz
+      name: Manihot esculenta JGI v6.1
+      id: Manihot_esculenta_JGI_v6.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/mpo.con.gz
+      name: Marchantia polymorpha JGI v3.1
+      id: Marchantia_polymorpha_JGI_v3.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/mtr.con.gz
+      name: Medicago truncatula JGI Mt4.0v1
+      id: Medicago_truncatula_JGI_Mt4.0v1
     - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/mco.con.gz
       name: Micromonas commoda JGI v3.0
       id: Micromonas_commoda_JGI_v3.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/mac.con.gz
+      name: Musa acuminata Banana Genome v1.0
+      id: Musa_acuminata_Banana_Genome_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/nnu.con.gz
+      name: Nelumbo nucifera LOTUS-DB v1.1
+      id: Nelumbo_nucifera_LOTUS-DB_v1.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/oth.con.gz
+      name: Oropetium thomaeum JGI v1.0
+      id: Oropetium_thomaeum_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/obr.con.gz
+      name: Oryza brachyantha Ensembl Plants v1.4b
+      id: Oryza_brachyantha_Ensembl_Plants_v1.4b
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/osaindica.con.gz
+      name: Oryza sativa ssp. indica MBKBASE v1.0
+      id: Oryza_sativa_ssp._indica_MBKBASE_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/osa.con.gz
+      name: Oryza sativa ssp. japonica JGI v7.0
+      id: Oryza_sativa_ssp._japonica_JGI_v7.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/pax.con.gz
+      name: Petunia axillaris Sol Genomics v1.6.2
+      id: Petunia_axillaris_Sol_Genomics_v1.6.2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/peq.con.gz
+      name: Phalaenopsis equestris Genomics v1.0
+      id: Phalaenopsis_equestris_Genomics_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/ped.con.gz
+      name: Phyllostachys edulis NCGR v1.0
+      id: Phyllostachys_edulis_NCGR_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/ppa.con.gz
+      name: Physcomitrella patens JGI v3.3
+      id: Physcomitrella_patens_JGI_v3.3
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/pab.con.gz
+      name: Picea abies ConGenIE v1.0
+      id: Picea_abies_ConGenIE_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/ptr.con.gz
+      name: Populus trichocarpa JGI v3.01
+      id: Populus_trichocarpa_JGI_v3.01
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ppe.con.gz
+      name: Prunus persica JGI v2.1
+      id: Prunus_persica_JGI_v2.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/pbr.con.gz
+      name: Pyrus bretschneideri Pear Genome Project v1.0
+      id: Pyrus_bretschneideri_Pear_Genome_Project_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/rco.con.gz
+      name: Ricinus communis JGI v0.1
+      id: Ricinus_communis_JGI_v0.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/spa.con.gz
+      name: Schrenkiella parvula Thellungiella v2.0 (TpV84)
+      id: Schrenkiella_parvula_Thellungiella_v2.0_(TpV84)
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/smo.con.gz
+      name: Selaginella moellendorffii JGI v1.0
+      id: Selaginella_moellendorffii_JGI_v1.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/sit.con.gz
+      name: Setaria italica JGI v2.2
+      id: Setaria_italica_JGI_v2.2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/sly.con.gz
+      name: Solanum lycopersicum Sol Genomics itag2.4
+      id: Solanum_lycopersicum_Sol_Genomics_itag2.4
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/stu.con.gz
+      name: Solanum tuberosum JGI v4.03
+      id: Solanum_tuberosum_JGI_v4.03
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/sbi.con.gz
+      name: Sorghum bicolor JGI v3.1
+      id: Sorghum_bicolor_JGI_v3.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/spo.con.gz
+      name: Spirodela polyrhiza JGI v2.0
+      id: Spirodela_polyrhiza_JGI_v2.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/tha.con.gz
+      name: Tarenaya hassleriana RefSeq v1
+      id: Tarenaya_hassleriana_RefSeq_v1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/tca.con.gz
+      name: Theobroma cacao RefSeq v1.1
+      id: Theobroma_cacao_RefSeq_v1.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/tpr.con.gz
+      name: Trifolium pratense JGI v2
+      id: Trifolium_pratense_JGI_v2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/tae.con.gz
+      name: Triticum aestivum Ensembl Plants TGACv1
+      id: Triticum_aestivum_Ensembl_Plants_TGACv1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/ugi.con.gz
+      name: Utricularia gibba CoGe v4
+      id: Utricularia_gibba_CoGe_v4
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/vra.con.gz
+      name: Vigna radiata var. radiata LIS v6
+      id: Vigna_radiata_var._radiata_LIS_v6
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/vvi.con.gz
+      name: Vitis vinifera JGI 12xMarch2010
+      id: Vitis_vinifera_JGI_12xMarch2010
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/zma.con.gz
+      name: Zea mays B73 Ensembl Genomes v4.0
+      id: Zea_mays_B73_Ensembl_Genomes_v4.0
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04//Genomes/zju.con.gz
+      name: Ziziphus jujuba RefSeq v1.1
+      id: Ziziphus_jujuba_RefSeq_v1.1
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/zosmarina.con.gz
+      name: Zostera marina JGI v2.2
+      id: Zostera_marina_JGI_v2.2
+    - url: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_04//Genomes/zjn.con.gz
+      name: Zoysia japonica ssp. nagirizaki Zoysia Genome Database v1.1
+      id: Zoysia_japonica_ssp._nagirizaki_Zoysia_Genome_Database_v1.1
 
 data_managers:
     - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.2
@@ -18,3 +225,14 @@ data_managers:
       data_table_reload:
         - all_fasta
         - __dbkeys__
+
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bowtie2_index_builder/bowtie2_index_builder_data_manager/2.3.0
+      params:
+        - 'all_fasta_source': '{{ item.id }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        # Bowtie creates indices for Bowtie and TopHat
+        - bowtie2_indexes
+        - tophat2_indexes
