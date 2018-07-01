@@ -3,3 +3,4 @@ build/.venv
 .ipynb_checkpoints/
 .DS_Store
 **/.DS_Store
+build/build_*.sh
