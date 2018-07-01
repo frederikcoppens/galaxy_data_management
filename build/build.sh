@@ -1,4 +1,5 @@
 #!/bin/bash
+# based on https://github.com/bgruening/idc/blob/master/run_builder.sh
 
 set -e
 
@@ -7,7 +8,7 @@ set -e
 : ${EPHEMERIS_VERSION:="0.8.0"}
 : ${GALAXY_DEFAULT_ADMIN_USER:="admin@galaxy.org"}
 : ${GALAXY_DEFAULT_ADMIN_PASSWORD:="admin"}
-: ${EXPORT_DIR:="$HOME/export"}
+: ${EXPORT_DIR:="export"}
 : ${DATA_MANAGER_DATA_PATH:="${EXPORT_DIR}/data_manager"}
 
 : ${PLANEMO_PROFILE_NAME:="wxflowtest"}
@@ -15,19 +16,25 @@ set -e
 
 GALAXY_URL="http://localhost:$GALAXY_PORT"
 
-if [ ! -f .venv ]; then
+if [ ! -d .venv ]; then
+    echo 'installing ephemeris'
     virtualenv .venv
     . .venv/bin/activate
     pip install -U pip
-    #pip install ephemeris=="${EPHEMERIS_VERSION}"
-    pip install -e git+https//github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
+    pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
 fi
 
-. .eph/bin/activate
+echo 'ephemeris installed'
 
+. .venv/bin/activate
 
-docker run -it -v /Users/frcop/tmp/docker/export:/export/ -e GALAXY_CONFIG_GALAXY_DATA_MANAGER_DATA_PATH=/export/data_manager/ -p 8080:80 "quay.io/bgruening/galaxy:18.01"
+mkdir -p ${DATA_MANAGER_DATA_PATH}
+
+if [ ! "$(docker ps | grep 'quay.io/bgruening/galaxy:18.01')" ]; then
+  echo "starting docker"
+  docker run -d -v ${EXPORT_DIR}:/export/ -e GALAXY_CONFIG_GALAXY_DATA_MANAGER_DATA_PATH=/export/data_manager/ -p 8080:80 "quay.io/bgruening/galaxy:18.01"
+fi
 galaxy-wait -g ${GALAXY_URL}
 
-shed-tools install -d genome_data_manager.yaml -g $GALAXY_URL -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
-run-data-managers --config /Users/frcop/tmp/docker/export/data-managers/inputfile_subset.yaml -g $GALAXY_URL -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+shed-tools install -d ../genomes/genome_data_manager.yaml -g $GALAXY_URL -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+run-data-managers --config ../genomes/genome_data_manager.yaml -g $GALAXY_URL -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
