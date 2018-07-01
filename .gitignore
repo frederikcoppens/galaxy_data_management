@@ -1,0 +1,5 @@
+build/export/*
+build/.venv
+.ipynb_checkpoints/
+.DS_Store
+**/.DS_Store
