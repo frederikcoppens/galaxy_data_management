@@ -42,16 +42,25 @@ data_managers:
       data_table_reload:
         - all_gff
 
+    - id: salmon_index_builder
+      params:
+	- 'all_fasta_source': '{{ item.build_id }}_transcriptome'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_transcriptome'
+        - 'kmer_size': '31'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - salmon_indexes
 
-#    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bowtie2_index_builder/bowtie2_index_builder_data_manager/2.3.0
-#      params:
-#        - 'all_fasta_source': '{{ item.id }}'
-#        - 'sequence_name': '{{ item.name }}'
-#        - 'sequence_id': '{{ item.id }}'
-#      items: "{{ genomes }}"
-#      data_table_reload:
-#        # Bowtie creates indices for Bowtie and TopHat
-#        - bowtie2_indexes
-#        - tophat2_indexes
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bowtie2_index_builder/bowtie2_index_builder_data_manager/2.3.0
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        # Bowtie creates indices for Bowtie and TopHat
+        - bowtie2_indexes
+        - tophat2_indexes
 
 
