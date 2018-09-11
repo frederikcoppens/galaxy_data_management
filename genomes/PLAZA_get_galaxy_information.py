@@ -7,6 +7,7 @@
 
 
 import json
+import os
 from jinja2 import Environment
 import urllib
 import urllib.request
@@ -14,29 +15,41 @@ from urllib.error import HTTPError, URLError
 
 
 # Template for genomes entries 
-genome_j2 = """genomes:{% for genome in genomes %}
-    - url_genome: {{ genome.url_genome }}
-      name: {{ genome.name }}
-      id: {{ genome.id }}{% endfor %}"""
+#genome_j2 = """genomes:{% for genome in genomes %}
+#    - url_genome: {{ genome.url_genome }}
+#      name: {{ genome.name }}
+#      id: {{ genome.id }}{% endfor %}"""
 
 
 
 # Template for annotations entries 
 builds_j2 = """genomes:{% for build in builds %}
-    - url_genome: {{ build.url_genome }}
-      url_transcriptome: {{ build.url_transcriptome }}
-      url_annotation : {{ build.url_annotation }}
-      genome_id: {{ build.genome_id}}
+    - genome_id: {{ build.genome_id}}
       name: {{ build.name }}
-      build_id: {{ build.build_id }}{% endfor %}"""
+      build_id: {{ build.build_id }}
+      genome: {{ build.url_genome }}
+      transcriptome: {{ build.url_transcriptome }}
+      gff_annotations: 	
+          {% for key, value in build.annotations.items() -%} 
+              {{key}}: {{value}} 
+          {% endfor -%}
+      {% endfor %}"""
 
 
+      #url_annotation_all_tx_all_features : {{ build.url_annotation_all_tx_all_features }}
+      #url_annotation_all_tx_exon_features : {{ build.url_annotation_all_tx_exon_features }}
+      #url_annotation_rep_tx_all_features : {{ build.url_annotation_rep_tx_all_features }}
+      #url_annotation_rep_tx_exon_features : {{ build.url_annotation_rep_tx_exon_features }}
 
 # ## Getting genome information available for Galaxy through PLAZA API
 
 plaza_api_calls = {
-    'monocots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_monocots/api/get_galaxy_information',
-    'dicots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_dicots/api/get_galaxy_information',
+    # Global API call all available PLAZA instances, merges the results,
+    'plaza_global': 'https://bioinformatics.psb.ugent.be/plaza/api/get_species_data'
+
+    #instance specific calls     
+    #'dicots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_dicots/api/get_species_data'
+    #'monocots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_monocots/api/get_species_data"'
 }
 
 
@@ -59,14 +72,12 @@ for key, api_call in plaza_api_calls.items():
     call_results.append(plaza_list)
 
 
-
-builds = {}
+builds={}
 for plaza_list in call_results:
 
     for item in plaza_list: 
         print(item['common_name'])
 
-	## Add genome to the list, only if it was not captured before (same genome build can be repeated in different PLAZA versions)
         
         if item['eco_type'] == None:
             name = "{common_name} {version}".format(**item)
@@ -80,19 +91,35 @@ for plaza_list in call_results:
 
         try:
             url_genome = item['fasta']['genome']['location']
-            url_annotation = item['gff'][0]['location']
-            url_transcriptome = item['fasta']['cds']['location']            
-            #genomes[name] = {'url_genome': url_genome, 'url_annotation':url_annotation,'url_transcriptome':url_transcriptome, 'id': gid, 'name': name}
-            builds[name] = {'url_genome': url_genome,'url_annotation':url_annotation,'url_transcriptome':url_transcriptome, 'genome_id': gid, 'name': name, 'build_id': gid}
+            url_transcriptome = item['fasta']['transcripts']['location']
+	    #GFFs list:
+            annotations_entries= {}
+            for annotation in item['gff']:
+                annotation_type = annotation['used_transcripts'] + '_' + annotation['used_features'] 
+                location = annotation['location']
+                annotations_entries[annotation_type]=location
+            #print(name)
+            builds[name] = { \
+		'build_id': gid,\
+	        'genome_id': gid,\
+		'name': name,\
+		'genome': url_genome, \
+                'transcriptome': url_transcriptome,\
+                'annotations': annotations_entries, \
+		#'url_annotation_all_tx_all_features': url_annotation_all_tx_all_features,\
+		#'url_annotation_all_tx_exon_features' :url_annotation_all_tx_exon_features,\
+		#'url_annotation_rep_tx_all_features': url_annotation_rep_tx_all_features,\
+		#'url_annotation_rep_tx_exon_features': url_annotation_rep_tx_exon_features,\
+                }
         except TypeError:
-            print("\n!!! Not all necessary fields are provided !!!")
-            print(json.dumps(item, sort_keys=True, indent=4))
+            #print("\n!!! Not all necessary fields are provided !!!")
+            #print(json.dumps(item, sort_keys=True, indent=4))
             print("\n")
 
         except :
             print("Error")
-            print(json.dumps(item, sort_keys=True, indent=4))
-
+            #print(json.dumps(item, sort_keys=True, indent=4))
+        #print(json.dumps(item, sort_keys=True, indent=4))  
 
 
 print("\nGenomes found on PLAZA FTP: {}".format(len(builds)))
@@ -116,9 +143,8 @@ with open('genomes.yaml', 'w') as f:
     f.write(Environment().from_string(builds_j2).render(builds=builds_list))
 
 
-# ## Get complete yaml file
+## Get complete yaml file to use as input to ephemeris
 
-
-#get_ipython().system('echo "\\n" >> genomes.yaml # making sure there is a new line at the end')
-#get_ipython().system('cat genomes.yaml data_managers.yaml > genome_data_manager.yaml')
+os.system('echo "\\n" >> genomes.yaml # making sure there is a new line at the end') 
+os.system('cat genomes.yaml data_managers.yaml > genome_data_manager.yaml')
 
