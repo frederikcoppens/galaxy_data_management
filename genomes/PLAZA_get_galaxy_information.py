@@ -27,13 +27,18 @@ builds_j2 = """genomes:{% for build in builds %}
     - genome_id: {{ build.genome_id}}
       name: {{ build.name }}
       build_id: {{ build.build_id }}
-      genome: {{ build.url_genome }}
-      transcriptome: {{ build.url_transcriptome }}
+      genome: {{ build.genome }}
+      all_tx_transcriptome: {{ build.all_tx_transcriptome }}
+      selected_tx_transcriptome: {{ build.selected_tx_transcriptome }}
+      all_tx_tx2gene: {{ build.all_tx_tx2gene }}
+      selected_tx_tx2gene: {{ build.selected_tx_tx2gene }}
       gff_annotations: 	
           {% for key, value in build.annotations.items() -%} 
               {{key}}: {{value}} 
           {% endfor -%}
       {% endfor %}"""
+
+
 
 
       #url_annotation_all_tx_all_features : {{ build.url_annotation_all_tx_all_features }}
@@ -91,7 +96,17 @@ for plaza_list in call_results:
 
         try:
             url_genome = item['fasta']['genome']['location']
-            url_transcriptome = item['fasta']['transcripts']['location']
+            #url_transcriptome = item['fasta']['transcripts']['location']
+            for transcriptome in item['fasta']['transcripts']:
+                if transcriptome["used_transcripts"]=="selected_transcript":
+                        selected_tx_fasta=transcriptome['location']
+                if transcriptome["used_transcripts"]=="all_transcripts":
+                        all_tx_fasta=transcriptome['location']
+            for tx2gene in item['transcript_mapping']:
+                if tx2gene['used_transcripts']=="selected_transcript":
+                        tx2gene_selected_tx = tx2gene['location']	
+                if tx2gene['used_transcripts']=="selected_transcript":
+                        tx2gene_all_tx = tx2gene['location']
 	    #GFFs list:
             annotations_entries= {}
             for annotation in item['gff']:
@@ -104,7 +119,10 @@ for plaza_list in call_results:
 	        'genome_id': gid,\
 		'name': name,\
 		'genome': url_genome, \
-                'transcriptome': url_transcriptome,\
+                'all_tx_transcriptome': all_tx_fasta,\
+		'selected_tx_transcriptome': all_tx_fasta,\
+		'all_tx_tx2gene': tx2gene_selected_tx,\
+		'selected_tx_tx2gene': tx2gene_all_tx,\
                 'annotations': annotations_entries, \
 		#'url_annotation_all_tx_all_features': url_annotation_all_tx_all_features,\
 		#'url_annotation_all_tx_exon_features' :url_annotation_all_tx_exon_features,\
