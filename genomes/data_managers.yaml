@@ -1,3 +1,20 @@
+          
+
+    - genome_id: Actinidia_chinensis_FEI_Lab_v1.0
+      name: Actinidia chinensis FEI Lab v1.0
+      build_id: Actinidia_chinensis_FEI_Lab_v1.0
+      genome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Genomes/ach.con.gz
+      all_tx_transcriptome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Fasta/transcripts.all_transcripts.ach.fasta.gz
+      selected_tx_transcriptome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Fasta/transcripts.all_transcripts.ach.fasta.gz
+      all_tx_tx2gene: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/TranscriptMapping/transcript_mapping.selected_transcript.ach.csv.gz
+      selected_tx_tx2gene: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/TranscriptMapping/transcript_mapping.selected_transcript.ach.csv.gz
+      gff_selected_tx_exon_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.selected_transcript.exon_features.ach.gff3.gz 
+      gff_selected_tx_all_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.selected_transcript.all_features.ach.gff3.gz
+      gff_all_tx_all_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.all_transcripts.all_features.ach.gff3.gz
+      gff_all_tx_exon_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.all_transcripts.exon_features.ach.gff3.gz
+
+
+
 data_managers:
     #Load the genome fasta
     - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.2
@@ -6,7 +23,7 @@ data_managers:
         - 'dbkey_source|dbkey': '{{ item.genome_id }}'
         - 'dbkey_source|dbkey_name': '{{ item.name }}'
         - 'reference_source|reference_source_selector': 'url'
-        - 'reference_source|user_url': '{{ item.url_genome }}'
+        - 'reference_source|user_url': '{{ item.genome }}'
         - 'sequence_name': '{{ item.name }}'
         - 'sequence_id': '{{ item.build_id }}'
         - 'sorting|sorting_selector': 'as_is'
@@ -21,48 +38,59 @@ data_managers:
         - 'dbkey_source|dbkey_source_selector': 'existing'
         - 'dbkey_source|dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
-        - 'reference_source|user_url': '{{ item.url_transcriptome }}'
-        - 'sequence_name': '{{ item.name }}'
-        - 'sequence_id': '{{ item.build_id }}_transcriptome'
+        - 'reference_source|user_url': '{{ item.all_tx_transcriptome }}'
+        - 'sequence_name': '{{ item.name }} - Transcripts'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
         - 'sorting|sorting_selector': 'as_is'
       items: "{{ genomes }}"
       data_table_reload:
         - all_fasta
 
 
-    ## Load all_tx_all_features
+    ## Load gff_all_tx_all_features
     - id: data_manager_fetch_gff
       params:
-        - 'file_type': 'full'
         - 'dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
-        - 'reference_source|user_url': '{{ item.url_annotation }}'
+        - 'reference_source|user_url': '{{ item.gff_all_tx_all_features }}'
         - 'sequence_name': '{{ item.name }}'
-        - 'sequence_id': '{{ item.build_id }}_annotation_gff'
+        - 'sequence_id': '{{ item.build_id }}_gff_all_tx_all_features'
       items: "{{ genomes }}"
       data_table_reload:
         - all_gff
 
 
-    ## Load rep_tx_all_features
+    ## Load gff_rep_tx_all_features
     - id: data_manager_fetch_gff
       params:
         - 'file_type': 'full'
         - 'dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
-        - 'reference_source|user_url': '{{ item.url_annotation }}'
+        - 'reference_source|user_url': '{{ item.gff_selected_tx_all_features }}'
         - 'sequence_name': '{{ item.name }}'
-        - 'sequence_id': '{{ item.build_id }}_annotation_gff'
+        - 'sequence_id': '{{ item.build_id }}_gff_selected_tx_all_features'
       items: "{{ genomes }}"
       data_table_reload:
         - all_gff
+
+    ## Load tx2gene table
+    - id: data_manager_fetch_tx2gene
+      params:
+        - 'dbkey': '{{ item.genome_id }}'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.all_tx_tx2gene }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_tx2gene'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - tx2gene
 
     # Build Salmon index using the transcriptome fasta
     - id: salmon_index_builder
       params:
-	- 'all_fasta_source': '{{ item.build_id }}_transcriptome'
+	- 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
         - 'sequence_name': '{{ item.name }}'
-        - 'sequence_id': '{{ item.build_id }}_transcriptome'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
         - 'kmer_size': '31'
       items: "{{ genomes }}"
       data_table_reload:

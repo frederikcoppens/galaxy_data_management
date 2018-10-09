@@ -32,10 +32,10 @@ builds_j2 = """genomes:{% for build in builds %}
       selected_tx_transcriptome: {{ build.selected_tx_transcriptome }}
       all_tx_tx2gene: {{ build.all_tx_tx2gene }}
       selected_tx_tx2gene: {{ build.selected_tx_tx2gene }}
-      gff_annotations: 	
-          {% for key, value in build.annotations.items() -%} 
-              {{key}}: {{value}} 
-          {% endfor -%}
+      gff_selected_tx_exon_features: {{ build.gff_selected_tx_exon_features}} 
+      gff_selected_tx_all_features: {{ build.gff_selected_tx_all_features}}
+      gff_all_tx_all_features: {{ build.gff_all_tx_all_features}}
+      gff_all_tx_exon_features: {{ build.gff_all_tx_exon_features}}
       {% endfor %}"""
 
 
@@ -108,22 +108,35 @@ for plaza_list in call_results:
                 if tx2gene['used_transcripts']=="selected_transcript":
                         tx2gene_all_tx = tx2gene['location']
 	    #GFFs list:
-            annotations_entries= {}
+            #annotations_entries= {}
             for annotation in item['gff']:
-                annotation_type = annotation['used_transcripts'] + '_' + annotation['used_features'] 
-                location = annotation['location']
-                annotations_entries[annotation_type]=location
+                if annotation['used_transcripts'] == 'all_transcripts':
+                        if annotation['used_features'] == 'exon_features':
+                                gff_all_tx_exon_features=annotation['location']
+                        if annotation['used_features'] == 'all_features':
+                                gff_all_tx_all_features=annotation['location']
+                if annotation['used_transcripts'] == 'selected_transcript':
+                        if annotation['used_features'] == 'exon_features':
+                                gff_selected_tx_exon_features=annotation['location']
+                        if annotation['used_features'] == 'all_features':
+                                gff_selected_tx_all_features=annotation['location']
+                #annotation_type = annotation['used_transcripts'] + '_' + annotation['used_features'] 
+                #location = annotation['location']
+                #annotations_entries[annotation_type]=location
             #print(name)
             builds[name] = { \
 		'build_id': gid,\
 	        'genome_id': gid,\
 		'name': name,\
-		'genome': url_genome, \
+		'genome': url_genome,\
+                'gff_all_tx_exon_features': gff_all_tx_exon_features,\
+                'gff_all_tx_all_features': gff_all_tx_all_features,\
+		'gff_selected_tx_exon_features': gff_selected_tx_exon_features,\
+		'gff_selected_tx_all_features': gff_selected_tx_all_features,\
                 'all_tx_transcriptome': all_tx_fasta,\
-		'selected_tx_transcriptome': all_tx_fasta,\
-		'all_tx_tx2gene': tx2gene_selected_tx,\
-		'selected_tx_tx2gene': tx2gene_all_tx,\
-                'annotations': annotations_entries, \
+		'selected_tx_transcriptome': selected_tx_fasta,\
+		'all_tx_tx2gene': tx2gene_all_tx,\
+		'selected_tx_tx2gene': tx2gene_selected_tx,\
 		#'url_annotation_all_tx_all_features': url_annotation_all_tx_all_features,\
 		#'url_annotation_all_tx_exon_features' :url_annotation_all_tx_exon_features,\
 		#'url_annotation_rep_tx_all_features': url_annotation_rep_tx_all_features,\
@@ -134,8 +147,8 @@ for plaza_list in call_results:
             #print(json.dumps(item, sort_keys=True, indent=4))
             print("\n")
 
-        except :
-            print("Error")
+        #except :
+        #    print("Error")
             #print(json.dumps(item, sort_keys=True, indent=4))
         #print(json.dumps(item, sort_keys=True, indent=4))  
 
