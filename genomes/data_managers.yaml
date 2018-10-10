@@ -1,20 +1,3 @@
-          
-
-    - genome_id: Actinidia_chinensis_FEI_Lab_v1.0
-      name: Actinidia chinensis FEI Lab v1.0
-      build_id: Actinidia_chinensis_FEI_Lab_v1.0
-      genome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Genomes/ach.con.gz
-      all_tx_transcriptome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Fasta/transcripts.all_transcripts.ach.fasta.gz
-      selected_tx_transcriptome: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/Fasta/transcripts.all_transcripts.ach.fasta.gz
-      all_tx_tx2gene: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/TranscriptMapping/transcript_mapping.selected_transcript.ach.csv.gz
-      selected_tx_tx2gene: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/TranscriptMapping/transcript_mapping.selected_transcript.ach.csv.gz
-      gff_selected_tx_exon_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.selected_transcript.exon_features.ach.gff3.gz 
-      gff_selected_tx_all_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.selected_transcript.all_features.ach.gff3.gz
-      gff_all_tx_all_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.all_transcripts.all_features.ach.gff3.gz
-      gff_all_tx_exon_features: ftp://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_04/GFF/ach/annotation.all_transcripts.exon_features.ach.gff3.gz
-
-
-
 data_managers:
     #Load the genome fasta
     - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.2
