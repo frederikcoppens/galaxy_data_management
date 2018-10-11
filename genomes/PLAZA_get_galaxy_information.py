@@ -2,8 +2,7 @@
 
 # # Get PLAZA information for Galaxy
 # 
-# Get all genomes and annotations available in PLAZA v4, formatted to be used in Galaxy
-# The genome annotations were curated so they always match the genome info
+# Get all genomes and annotations available in PLAZA data warehouse, formatted to be used by Ephemeris
 
 
 import json
@@ -12,14 +11,6 @@ from jinja2 import Environment
 import urllib
 import urllib.request
 from urllib.error import HTTPError, URLError
-
-
-# Template for genomes entries 
-#genome_j2 = """genomes:{% for genome in genomes %}
-#    - url_genome: {{ genome.url_genome }}
-#      name: {{ genome.name }}
-#      id: {{ genome.id }}{% endfor %}"""
-
 
 
 # Template for annotations entries 
@@ -41,17 +32,10 @@ builds_j2 = """genomes:{% for build in builds %}
 
 
 
-      #url_annotation_all_tx_all_features : {{ build.url_annotation_all_tx_all_features }}
-      #url_annotation_all_tx_exon_features : {{ build.url_annotation_all_tx_exon_features }}
-      #url_annotation_rep_tx_all_features : {{ build.url_annotation_rep_tx_all_features }}
-      #url_annotation_rep_tx_exon_features : {{ build.url_annotation_rep_tx_exon_features }}
-
 # ## Getting genome information available for Galaxy through PLAZA API
-
 plaza_api_calls = {
-    # Global API call all available PLAZA instances, merges the results,
+    # Global API call all available PLAZA instances, contains a merge of all instances.
     'plaza_global': 'https://bioinformatics.psb.ugent.be/plaza/api/get_species_data'
-
     #instance specific calls     
     #'dicots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_dicots/api/get_species_data'
     #'monocots_v4': 'https://bioinformatics.psb.ugent.be/plaza/versions/plaza_v4_monocots/api/get_species_data"'
@@ -107,8 +91,6 @@ for plaza_list in call_results:
                         tx2gene_selected_tx = tx2gene['location']	
                 if tx2gene['used_transcripts']=="selected_transcript":
                         tx2gene_all_tx = tx2gene['location']
-	    #GFFs list:
-            #annotations_entries= {}
             for annotation in item['gff']:
                 if annotation['used_transcripts'] == 'all_transcripts':
                         if annotation['used_features'] == 'exon_features':
@@ -120,9 +102,6 @@ for plaza_list in call_results:
                                 gff_selected_tx_exon_features=annotation['location']
                         if annotation['used_features'] == 'all_features':
                                 gff_selected_tx_all_features=annotation['location']
-                #annotation_type = annotation['used_transcripts'] + '_' + annotation['used_features'] 
-                #location = annotation['location']
-                #annotations_entries[annotation_type]=location
             #print(name)
             builds[name] = { \
 		'build_id': gid,\
@@ -137,10 +116,6 @@ for plaza_list in call_results:
 		'selected_tx_transcriptome': selected_tx_fasta,\
 		'all_tx_tx2gene': tx2gene_all_tx,\
 		'selected_tx_tx2gene': tx2gene_selected_tx,\
-		#'url_annotation_all_tx_all_features': url_annotation_all_tx_all_features,\
-		#'url_annotation_all_tx_exon_features' :url_annotation_all_tx_exon_features,\
-		#'url_annotation_rep_tx_all_features': url_annotation_rep_tx_all_features,\
-		#'url_annotation_rep_tx_exon_features': url_annotation_rep_tx_exon_features,\
                 }
         except TypeError:
             #print("\n!!! Not all necessary fields are provided !!!")
@@ -157,25 +132,16 @@ print("\nGenomes found on PLAZA FTP: {}".format(len(builds)))
 
 
 # ## Write genomes to file
-
-
-#genome_list = []
 builds_list = []
-#for k, v in sorted(genomes.items()):
-#    genome_list.append(v)
-
 for k, v in sorted(builds.items()):
     builds_list.append(v)
 
-print(len(builds_list))
 with open('genomes.yaml', 'w') as f:
-#    f.write(Environment().from_string(genome_j2).render(genomes=genome_list))
-#    f.write('\n\n')
     f.write(Environment().from_string(builds_j2).render(builds=builds_list))
 
 
 ## Get complete yaml file to use as input to ephemeris
 
 os.system('echo "\\n" >> genomes.yaml # making sure there is a new line at the end') 
-os.system('cat genomes.yaml data_managers.yaml > genome_data_manager.yaml')
-
+os.system('cat genomes.yaml data_managers_genome_based.yaml > genome_data_manager_run.yaml')
+os.system('cat genomes.yaml data_managers_transcriptome_based.yaml > transcriptome_data_manager_run.yaml')
