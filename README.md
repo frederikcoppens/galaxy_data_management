@@ -1,13 +1,27 @@
 # Adding PLAZA genomes in Galaxy
 
-Building a .yaml file to automatically add all plant genomes available in the PLAZA FTP and run data managers on it.
+Building a set of .yaml files that can be used as input for ephemeris to automatically add all plant genome build available in the PLAZA data warehouse and run the index-building data managers on these.
 
 ## How it works
 
-- Run the Jupyter notebook in the folder genomes
+
+### To install the data in a running instance:
+
+- Install the required data managers (located in data_managers.yaml). This file is ready to be used with Ephemeris:
+
+- Run the python script notebook in the folder genomes
   - calls the PLAZA API
-  - writes genomes.yaml file
-  - combines the data_managers and genomes yaml files to one
+  - Writes genomes.yaml file. This contains a yaml-structured file with all the information retrieved.
+  - Writes 2 files (genome_data_manager_run.yaml and transcriptome_data_manager_run.yaml) combining the different data managers lists with the genomes yaml files. These files are ready to be used by ephemeris to install the data.
+
+- Run the data managers. 
+ - This is done in 2 steps:
+	- Run the genomes dependant data managers (genome_data_manager_run.yaml): This creates the corresponding entries in the dbkeys table, installs the genomes fasta files and runs the index on these.
+        - Run the transcriptome dependant data managers (transcriptome_data_manager_run.yaml): This installs the transcriptomes, linking them with the previoisly created dbkey, installs the gff and other annotation related files, and finally creates the corresponding indexes based on these files. 
+		
+
+
+### To deploy a docker-based Galaxy instance and install the data there:
 - On command line
 
 ```
