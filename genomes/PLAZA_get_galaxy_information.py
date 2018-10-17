@@ -89,7 +89,7 @@ for plaza_list in call_results:
             for tx2gene in item['transcript_mapping']:
                 if tx2gene['used_transcripts']=="selected_transcript":
                         tx2gene_selected_tx = tx2gene['location']	
-                if tx2gene['used_transcripts']=="selected_transcript":
+                if tx2gene['used_transcripts']=="all_transcripts":
                         tx2gene_all_tx = tx2gene['location']
             for annotation in item['gff']:
                 if annotation['used_transcripts'] == 'all_transcripts':
