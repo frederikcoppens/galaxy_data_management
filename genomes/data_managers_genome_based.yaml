@@ -72,3 +72,4 @@ data_managers:
         - 'all_fasta_source': '{{ item.build_id }}'
         - 'name': '{{ item.name }} - splice junctions NOT included'
         - 'GTFconditional|GTFselect': 'withoutGTF'
+      items: "{{ genomes }}"
