@@ -70,5 +70,5 @@ data_managers:
     - id: rna_star_index_builder
       params:
         - 'all_fasta_source': '{{ item.build_id }}'
-        - 'name': '{{ item.name }}'
-        -  'GTFconditional|GTFselect': 'withoutGTF'
+        - 'name': '{{ item.name }} - splice junctions NOT included'
+        - 'GTFconditional|GTFselect': 'withoutGTF'
