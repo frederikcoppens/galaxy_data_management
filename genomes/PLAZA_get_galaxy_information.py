@@ -139,9 +139,10 @@ for k, v in sorted(builds.items()):
 with open('genomes.yaml', 'w') as f:
     f.write(Environment().from_string(builds_j2).render(builds=builds_list))
 
+genomes_dir=os.path.dirname(os.path.realpath(__file__)) 
 
 ## Get complete yaml file to use as input to ephemeris
 
 os.system('echo "\\n" >> genomes.yaml # making sure there is a new line at the end') 
-os.system('cat genomes.yaml data_managers_genome_based.yaml > genome_data_manager_run.yaml')
-os.system('cat genomes.yaml data_managers_transcriptome_based.yaml > transcriptome_data_manager_run.yaml')
+os.system('cat genomes.yaml ' + genomes_dir+ '/data_managers_genome_based.yaml > genome_data_manager_run.yaml')
+os.system('cat genomes.yaml ' + genomes_dir+ '/data_managers_transcriptome_based.yaml > transcriptome_data_manager_run.yaml')
