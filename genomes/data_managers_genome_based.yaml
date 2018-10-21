@@ -22,7 +22,7 @@ data_managers:
         - 'dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
         - 'reference_source|user_url': '{{ item.gff_all_tx_all_features }}'
-        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_name': '{{ item.name }} - All transcripts - All features'
         - 'sequence_id': '{{ item.build_id }}_gff_all_tx_all_features'
       items: "{{ genomes }}"
       data_table_reload:
@@ -32,11 +32,10 @@ data_managers:
     ## Load gff_rep_tx_all_features
     - id: data_manager_fetch_gff
       params:
-        - 'file_type': 'full'
         - 'dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
         - 'reference_source|user_url': '{{ item.gff_selected_tx_all_features }}'
-        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_name': '{{ item.name }} - Selected transcripts - All features'
         - 'sequence_id': '{{ item.build_id }}_gff_selected_tx_all_features'
       items: "{{ genomes }}"
       data_table_reload:
@@ -46,6 +45,7 @@ data_managers:
     - id: data_manager_fetch_tx2gene
       params:
         - 'dbkey': '{{ item.genome_id }}'
+        - 'file_type' : 'tx2gene'
         - 'reference_source|reference_source_selector': 'url'
         - 'reference_source|user_url': '{{ item.all_tx_tx2gene }}'
         - 'sequence_name': '{{ item.name }}'

@@ -26,7 +26,7 @@ tools:
 - name: data_manager_fetch_tx2gene
   owner: ieguinoa
   revisions:
-  - d71f65b854de
+  - bacd91d8b05a
   tool_panel_section_label: None
   tool_shed_url: toolshed.g2.bx.psu.edu
 - name:  data_manager_salmon_index_builder
