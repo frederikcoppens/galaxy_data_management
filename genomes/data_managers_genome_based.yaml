@@ -32,7 +32,6 @@ data_managers:
     ## Load gff_rep_tx_all_features
     - id: data_manager_fetch_gff
       params:
-        - 'file_type': 'full'
         - 'dbkey': '{{ item.genome_id }}'
         - 'reference_source|reference_source_selector': 'url'
         - 'reference_source|user_url': '{{ item.gff_selected_tx_all_features }}'
