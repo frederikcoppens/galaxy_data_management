@@ -7,12 +7,13 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
 
 ### To install the data in a running instance:
 
-- Install the required data managers (located in data_managers.yaml). This file is ready to be used with Ephemeris:
+- Install the required data managers (located in data_managers.yaml.lock). This file is ready to be used with ephemeris:
+     shed-tools install -t genomes/data_managers_list.yaml.lock -g $GALAXY_URL -a $API_KEY
 
-- Run the python script notebook in the folder genomes
-  - calls the PLAZA API
-  - Writes genomes.yaml file. This contains a yaml-structured file with all the information retrieved.
-  - Writes 2 files (genome_data_manager_run.yaml and transcriptome_data_manager_run.yaml) combining the different data managers lists with the genomes yaml files. These files are ready to be used by ephemeris to install the data.
+
+- Run genomes/PLAZA_get_galaxy_information.py. This script calls the PLAZA API to retrieve updated genome information and writes 2 output files:
+	- genomes.yaml file: This contains a yaml-structured file with all the information retrieved.
+	- ################# TODO : EDIT Writes 2 files (genome_data_manager_run.yaml and transcriptome_data_manager_run.yaml) combining the different data managers lists with the genomes yaml files. These files are ready to be used by ephemeris to install the data.//
 
 - Run the data managers. 
  - This is done in 2 steps:
