@@ -25,6 +25,7 @@ run-data-managers --config genome_data_manager_run.yaml -g $GALAXY_URL -a $API_K
 
     - (OPTIONAL) If you also want to run the install the transcriptomes and the idnexes associated with these, run the transcriptome dependant data managers (transcriptome_data_manager_run.yaml). This installs the transcriptomes, linking them with the previoisly created dbkey, and finally creates the corresponding indexes based on these files:
 
+
 ``` 
 run-data-managers --config genome_data_manager_run.yaml -g $GALAXY_URL -a $API_KEY
 ```
