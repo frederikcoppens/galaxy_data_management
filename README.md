@@ -50,10 +50,9 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
 
 ## Requirements
 
-- virtualenv
-- docker
-- others?
-
+- docker (In case of deplpoying a docker-based Galaxy instance)
+- ephemeris: This can be installed in different ways.
+ 
 ## Adding new data managers
 
 edit the file data_managers.yaml and add a new item.
