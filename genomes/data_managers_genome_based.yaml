@@ -67,9 +67,23 @@ data_managers:
         - bowtie2_indexes
         - tophat2_indexes
 
-    - id: rna_star_index_builder
+    # Build STAR index (no GFF)
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_star_index_builder/rna_star_index_builder_data_manager/0.0.5
       params:
         - 'all_fasta_source': '{{ item.build_id }}'
         - 'name': '{{ item.name }} - splice junctions NOT included'
         - 'GTFconditional|GTFselect': 'withoutGTF'
       items: "{{ genomes }}"
+      data_table_reload:
+        - rnastar_index2
+
+    #Build HISAT2 INDEX
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_hisat2_index_builder/hisat2_index_builder_data_manager/2.0.5
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}'
+        - 'sequence_name': '{{ item.name }} - splice junctions NOT included'
+        - 'sequence_id': '{{ item.build_id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - hisat2_indexes
+
