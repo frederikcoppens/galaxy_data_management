@@ -59,7 +59,7 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
     ```
   - Install with conda (use Miniconda3 in order to prevent conflicts with python3 ):
      ```
-       conda create --channel bioconda --name ephemeris_test ephemeris 
+       conda create --channel bioconda --name ephemeris ephemeris 
        source ~/miniconda2/bin/activate ephemeris
      ```
   - Install inside a python virtualenv:
@@ -74,7 +74,8 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
   
 ## Adding new data managers
 
-edit the file data_managers.yaml and add a new item.
+New data managers can be added to genomes/data_managers_genome_based.yaml or genomes/data_managers_transcriptome_based.yaml, after running genomes/PLAZA_get_galaxy_information.py these will be added in the corresponding conf file to be used with ephemeris.
+
 
 - how to find the ID: run it in Galaxy and check the info
 - to make it work you need the version at the end of the ID !
