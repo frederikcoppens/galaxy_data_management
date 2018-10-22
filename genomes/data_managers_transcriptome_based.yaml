@@ -26,3 +26,13 @@ data_managers:
       data_table_reload:
         - salmon_indexes
 
+    # Build kallisto index using the transcriptome fasta
+    - id: kallisto_index_builder
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - kallisto_indexes
+
