@@ -55,14 +55,23 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
 - ephemeris, which can be installed in different ways.
   - Install directly from repo src code:
   ```
-  pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
+       pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
   ```
   - Install with conda (use Miniconda3 in order to prevent conflicts with python3 ):
-    ```
-    conda create --channel bioconda --name ephemeris_test ephemeris 
-    source ~/miniconda2/bin/activate ephemeris
-    ```
- 
+  ```
+       conda create --channel bioconda --name ephemeris_test ephemeris 
+       source ~/miniconda2/bin/activate ephemeris
+  ```
+  - Install inside a python virtualenv:
+ ```
+       virtualenv .venv
+       . .venv/bin/activate
+       pip install -U pip
+       pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
+ ```
+  
+  
+  
 ## Adding new data managers
 
 edit the file data_managers.yaml and add a new item.
