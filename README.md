@@ -43,10 +43,6 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
   sh build_public.sh
 ```
 
-## Data managers included
-
-- all_fasta
-- bowtie2
 
 ## Requirements
 
