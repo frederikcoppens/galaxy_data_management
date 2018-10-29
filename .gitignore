@@ -4,3 +4,8 @@ build/.venv
 .DS_Store
 **/.DS_Store
 build/build_*.sh
+
+#template with data managers entries
+genomes/*.yaml
+!genomes/data_managers_genome_based.yaml
+!genomes/data_managers_transcriptome_based.yaml

@@ -1,0 +1,89 @@
+data_managers:
+    #Load the genome fasta
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.2
+      params:
+        - 'dbkey_source|dbkey_source_selector': 'new'
+        - 'dbkey_source|dbkey': '{{ item.genome_id }}'
+        - 'dbkey_source|dbkey_name': '{{ item.name }}'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.genome }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}'
+        - 'sorting|sorting_selector': 'as_is'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - all_fasta
+        - __dbkeys__
+
+    
+    ## Load gff_all_tx_all_features
+    - id: data_manager_fetch_gff
+      params:
+        - 'dbkey': '{{ item.genome_id }}'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.gff_all_tx_all_features }}'
+        - 'sequence_name': '{{ item.name }} - All transcripts - All features'
+        - 'sequence_id': '{{ item.build_id }}_gff_all_tx_all_features'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - all_gff
+
+
+    ## Load gff_rep_tx_all_features
+    - id: data_manager_fetch_gff
+      params:
+        - 'dbkey': '{{ item.genome_id }}'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.gff_selected_tx_all_features }}'
+        - 'sequence_name': '{{ item.name }} - Selected transcripts - All features'
+        - 'sequence_id': '{{ item.build_id }}_gff_selected_tx_all_features'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - all_gff
+
+    ## Load tx2gene table
+    - id: data_manager_fetch_tx2gene
+      params:
+        - 'dbkey': '{{ item.genome_id }}'
+        - 'file_type' : 'tx2gene'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.all_tx_tx2gene }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_tx2gene'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - tx2gene
+
+
+    # Build bowtie2 index using the genome fasta
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bowtie2_index_builder/bowtie2_index_builder_data_manager/2.3.0
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        # Bowtie creates indices for Bowtie and TopHat
+        - bowtie2_indexes
+        - tophat2_indexes
+
+    # Build STAR index (no GFF)
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_star_index_builder/rna_star_index_builder_data_manager/0.0.5
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}'
+        - 'name': '{{ item.name }} - splice junctions NOT included'
+        - 'GTFconditional|GTFselect': 'withoutGTF'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - rnastar_index2
+
+    #Build HISAT2 INDEX
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_hisat2_index_builder/hisat2_index_builder_data_manager/2.0.5
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}'
+        - 'sequence_name': '{{ item.name }} - splice junctions NOT included'
+        - 'sequence_id': '{{ item.build_id }}'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - hisat2_indexes
+

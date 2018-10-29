@@ -1,0 +1,38 @@
+data_managers:
+    ## Load the transcriptome fasta
+    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.2
+      params:
+        - 'dbkey_source|dbkey_source_selector': 'existing'
+        - 'dbkey_source|dbkey': '{{ item.genome_id }}'
+        - 'reference_source|reference_source_selector': 'url'
+        - 'reference_source|user_url': '{{ item.all_tx_transcriptome }}'
+        - 'sequence_name': '{{ item.name }} - Transcripts'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'sorting|sorting_selector': 'as_is'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - all_fasta
+
+
+
+    # Build Salmon index using the transcriptome fasta
+    - id: salmon_index_builder
+      params:
+	- 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'kmer_size': '31'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - salmon_indexes
+
+    # Build kallisto index using the transcriptome fasta
+    - id: kallisto_index_builder
+      params:
+        - 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'sequence_name': '{{ item.name }}'
+        - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
+      items: "{{ genomes }}"
+      data_table_reload:
+        - kallisto_indexes
+
