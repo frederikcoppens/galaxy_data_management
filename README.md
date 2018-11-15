@@ -49,7 +49,7 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
 - python3
 - docker: In case of deplpoying a docker-based Galaxy instance.
 - ephemeris, which can be installed in different ways.
-  - Install directly from repo src code:
+  - Install directly from repo src code. This has the advantage of installing the latest version, which is much faster to deploy a large number of genomes:
     ```
        pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
     ```
