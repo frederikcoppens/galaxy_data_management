@@ -18,7 +18,7 @@ data_managers:
     # Build Salmon index using the transcriptome fasta
     - id: salmon_index_builder
       params:
-	- 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
+        - 'all_fasta_source': '{{ item.build_id }}_all_tx_transcriptome'
         - 'sequence_name': '{{ item.name }}'
         - 'sequence_id': '{{ item.build_id }}_all_tx_transcriptome'
         - 'kmer_size': '31'
