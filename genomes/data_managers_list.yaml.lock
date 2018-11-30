@@ -31,8 +31,6 @@ tools:
   tool_shed_url: toolshed.g2.bx.psu.edu
 - name:  data_manager_salmon_index_builder
   owner: ieguinoa
-  revisions:
-  - ef2031036f47
   tool_panel_section_label: None
   tool_shed_url: toolshed.g2.bx.psu.edu
 - name: data_manager_star_index_builder
