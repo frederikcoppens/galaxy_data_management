@@ -70,10 +70,10 @@ for plaza_list in call_results:
         
         if item['eco_type'] == None:
             name = "{common_name} {version}".format(**item)
-            gid = "{common_name} {version}".format(**item).replace(' ','_')
+            gid = "{common_name} {version}".format(**item).replace(' ','_').replace(',', '').replace('(','').replace(')','')
         else:
             name = "{common_name} {eco_type} {version}".format(**item)
-            gid = "{common_name} {eco_type} {version}".format(**item).replace(' ','_')
+            gid = "{common_name} {eco_type} {version}".format(**item).replace(' ','_').replace(',', '').replace('(','').replace(')','')
         if name in builds:
             print("\tGenome for {} already captured".format(item['common_name']))
             continue

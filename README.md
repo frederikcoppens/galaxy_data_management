@@ -50,7 +50,7 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
 ## Requirements
 
 - python3
-- docker: In case of deplpoying a docker-based Galaxy instance.
+- docker: In case of deploying a docker-based Galaxy instance.
 - ephemeris, which can be installed in different ways.
   - Install directly from repo src code. This has the advantage of installing the latest version, which is much faster to deploy a large number of genomes:
     ```bash
@@ -68,7 +68,7 @@ Building a set of .yaml files that can be used as input for ephemeris to automat
        pip install -U pip
        pip install -e git+https://github.com/galaxyproject/ephemeris.git@dm#egg=ephemeris
      ```
-  
+- The run-data-managers methods in ephemeris requires the "watch_tool_data_dir” setting in galaxy.ini to be True (see https://ephemeris.readthedocs.io/en/latest/commands/run-data-managers.html) when running multiple data managers that are interdependent, as is the case with genome_data_manager_run.yaml and transcriptome_data_manager_run.yaml.
   
   
 ## Adding new data managers
